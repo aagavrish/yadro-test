@@ -4,10 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"sort"
 )
 
-// n^2 * log(n)
+// n^2
 
 func CheckBallsDistribution(in *bufio.Reader, out *bufio.Writer) error {
 	var n int
@@ -34,11 +33,19 @@ func CheckBallsDistribution(in *bufio.Reader, out *bufio.Writer) error {
 		}
 	}
 
-	sort.Ints(sumRows)
-	sort.Ints(sumCols)
+	sumRowsMap := make(map[int]int)
+	sumColsMap := make(map[int]int)
 
-	for i := 0; i < n; i++ {
-		if sumRows[i] != sumCols[i] {
+	for _, sum := range sumRows {
+		sumRowsMap[sum]++
+	}
+
+	for _, sum := range sumCols {
+		sumColsMap[sum]++
+	}
+
+	for sum, count := range sumRowsMap {
+		if sumColsMap[sum] != count {
 			fmt.Fprint(out, "no")
 			return nil
 		}
