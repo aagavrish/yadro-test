@@ -7,7 +7,7 @@ import (
 	"sort"
 )
 
-// n^2 * log(n)
+// n^2
 
 func CheckBallsDistribution(in *bufio.Reader, out *bufio.Writer) error {
 	var n int
